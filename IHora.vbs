@@ -50,5 +50,4 @@ End Sub
 Function tiempo(ByRef celda As Object)
 	celda.FORMULA = time()
 	celda.NUMBERFORMAT = 20041
-	Celda.VertJustify = com.sun.star.table.CellVertJustify.CENTER
 End Function
