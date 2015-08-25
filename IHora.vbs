@@ -14,26 +14,51 @@ Sub IHora()
 	Dim dataEmpty As Object 
 	Dim runMacro As Boolean
 	Dim siDato As Boolean	
+	Dim columnaDatos As Integer
+	Dim columnaHora As Integer
+	Dim posActual As Integer
+	Dim enterMove As String
+	Dim num As Integer
+
+	'Indica la columna en la cual se va almacenar la entrada de datos
+	'*Cambiar si se requiere utilizar otra columna
+	'A = 0, B = 1, C = 3 ...
+	columnaDatos = 0
+
+	'Indica la columna en la cual se va registrar la hora de entrada
+	columnaHora = columnaDatos + 1
+
+	'Cambiar dependiendo hacia donde se mueve la tecla intro
+	' R = Right, D = Down
+	enterMove = "R"
+
+	Select Case enterMove
+		Case "R"
+			posActual = columnaHora
+			num = 0
+		Case "D"
+			posActual = columnaDatos
+			num = -1
+	End Select
 	
 	Doc = ThisComponent
-	'Sheet = doc.sheets(0)
 	Sheet = Doc.getcurrentcontroller.activesheet
 	dataEmpty = com.sun.star.table.CellContentType
 	runMacro = True 
-	
+
 	Do While runMacro = True
 		celdaActual = ThisComponent.CurrentSelection
 		On Error Resume Next	
 		'Continuar ejecucion si se ha seleccionado un rango de celdas
-		columna = celdaActual.cellAddress.Column
-		'Obtener posicion de la columna actual  
-		If columna = 0 Then 		
+		'Obtener posicion de la columna actual 
+		columna = celdaActual.cellAddress.Column 
+		If columna = posActual Then 		'Cambiar valor de columna y fila 
 		 	'Obtener posicion de la fila actual'
-		 	fila = celdaActual.cellAddress.Row
+		 	fila = celdaActual.cellAddress.Row +  num
 			On Error Resume Next
-			'Saber si la fila anterior tiene informacion
-			celdaAN = Sheet.getCellByPosition(0,fila-1)
-			celdaBN = Sheet.getCellByPosition(1,fila-1)
+			'Saber si la columna anterior tiene información
+			celdaAN = Sheet.getCellByPosition(columnaDatos,fila)
+			celdaBN = Sheet.getCellByPosition(columnaHora,fila)
 			siDato = celdaAN.Type <> dataEmpty.EMPTY And CeldaBN.Type = dataEmpty.EMPTY
 			If siDato Then
 				'Cemtrar el contenido de las celdas'
