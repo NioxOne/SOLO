@@ -69,7 +69,6 @@ Sub IHora()
 				celdaBN.ParaAdjust = com.sun.star.style.ParagraphAdjust.CENTER
 			End If	
 		End If
-		wait 25
 	Loop
 End Sub
 
