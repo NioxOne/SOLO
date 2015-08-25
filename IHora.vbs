@@ -20,12 +20,12 @@ Sub IHora()
 	Dim enterMove As String
 	Dim num As Integer
 
-	'Indica la columna en la cual se va almacenar la entrada de datos
+	'Indica la columna en la cual se va a almacenar la entrada de datos
 	'*Cambiar si se requiere utilizar otra columna
 	'A = 0, B = 1, C = 2, D = 4 ...
 	columnaDatos = 0
 
-	'Indica la columna en la cual se va registrar la hora de entrada
+	'Indica la columna en la cual se va a registrar la hora de entrada
 	columnaHora = columnaDatos + 1
 
 	'*Cambiar dependiendo hacia donde se mueve la tecla intro
